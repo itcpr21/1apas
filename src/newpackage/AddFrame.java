@@ -57,17 +57,18 @@ public class AddFrame extends javax.swing.JFrame {
     public AddFrame() {
         
         initComponents();
-        
+        LoadAllProducts();
     }
     
     public AddFrame(String username) {
         initComponents();
         jLabel5.setText("Welcome  "+username);   
+       LoadAllProducts();
     }
 
  public void clearProduct(){
         proName.setText("");
-//        quantity.setText("");
+        proQuan.setValue(0);
         proPrice.setText("");
  }
     
@@ -392,10 +393,9 @@ private void product() {
             String prname = proName.getText();
             int prqty = (int) proQuan.getValue();
             Object prprice = proPrice.getValue();
-            
-            this. clearProduct();
+  
            ap.addProduct(prname, prqty,prprice);
-         
+           this. clearProduct();
            
            
 }

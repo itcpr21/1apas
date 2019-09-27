@@ -30,9 +30,12 @@ Class.forName("com.mysql.jdbc.Driver");
 Connection con = DriverManager.getConnection(conUrl);
 PreparedStatement pstmt = con.prepareStatement ("INSERT INTO product (`name`,`quantity`,`price`) "
         + "VALUES (?, ?, ?);");
+float nprice = Float.parseFloat(price.toString());
+
 pstmt.setString(1, product);
 pstmt.setInt(2, quantity);
-pstmt.setObject(3, price);
+pstmt.setFloat(3, nprice);
+
 pstmt.executeUpdate();
 
 JOptionPane.showMessageDialog(null, "Added");
