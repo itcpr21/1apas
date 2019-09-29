@@ -22,10 +22,13 @@ CREATE TABLE IF NOT EXISTS `product` (
   `quantity` int(11) NOT NULL,
   `price` int(11) NOT NULL,
   PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
--- Dumping data for table apasdb.product: ~12 rows (approximately)
+-- Dumping data for table apasdb.product: ~4 rows (approximately)
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
+INSERT INTO `product` (`product_id`, `name`, `quantity`, `price`) VALUES
+	(11, 'Diapper', 3, 6),
+	(12, 'milk tea', 2, 40);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 
 
@@ -37,9 +40,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
--- Dumping data for table apasdb.user: ~4 rows (approximately)
+-- Dumping data for table apasdb.user: ~2 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`user_id`, `firstname`, `lastname`, `username`, `password`) VALUES
 	(20, 'angel grace', 'apas', 'admin', '21232f297a57a5a743894a0e4a801fc3');

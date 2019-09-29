@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -40,9 +41,10 @@ public class AddFrame extends javax.swing.JFrame {
     while(rs.next()){
 
         tblModel.addRow(new Object[]{});
-         productTable.setValueAt(rs.getString("name"), row, 0);
-         productTable.setValueAt(rs.getString("quantity"), row, 1);
-         productTable.setValueAt(rs.getString("price"), row, 2);
+         productTable.setValueAt(rs.getString("product_id"), row, 0);
+         productTable.setValueAt(rs.getString("name"), row, 1);
+         productTable.setValueAt(rs.getString("quantity"), row, 2);
+         productTable.setValueAt(rs.getString("price"), row, 3);
         row++;
     }
 
@@ -101,6 +103,7 @@ public class AddFrame extends javax.swing.JFrame {
         label1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         addproductf = new javax.swing.JButton();
+        btndelete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
         jPanel1 = new javax.swing.JPanel();
@@ -224,19 +227,12 @@ public class AddFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Product Name", "Quantity", "Price"
+                "Product ID", "Product Name", "Quantity", "Price"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -248,6 +244,7 @@ public class AddFrame extends javax.swing.JFrame {
             productTable.getColumnModel().getColumn(0).setResizable(false);
             productTable.getColumnModel().getColumn(1).setResizable(false);
             productTable.getColumnModel().getColumn(2).setResizable(false);
+            productTable.getColumnModel().getColumn(3).setResizable(false);
         }
 
         jPanel4.setBackground(new java.awt.Color(204, 0, 0));
@@ -285,17 +282,32 @@ public class AddFrame extends javax.swing.JFrame {
             }
         });
 
+        btndelete.setBackground(new java.awt.Color(0, 0, 0));
+        btndelete.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        btndelete.setForeground(new java.awt.Color(255, 255, 255));
+        btndelete.setText("Delete");
+        btndelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout view1Layout = new javax.swing.GroupLayout(view1);
         view1.setLayout(view1Layout);
         view1Layout.setHorizontalGroup(
             view1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, view1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(addproductf, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8))
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(view1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(view1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, view1Layout.createSequentialGroup()
+                        .addComponent(addproductf, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8))
+                    .addGroup(view1Layout.createSequentialGroup()
+                        .addComponent(btndelete, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                        .addGap(349, 349, 349))))
         );
         view1Layout.setVerticalGroup(
             view1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,7 +317,9 @@ public class AddFrame extends javax.swing.JFrame {
                 .addGroup(view1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(view1Layout.createSequentialGroup()
                         .addComponent(addproductf, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 379, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 338, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, view1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())))
@@ -388,6 +402,35 @@ LoadAllProducts();
        this.setVisible(false);
        ProductTableFrame.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
+        
+        int selRow = productTable.getSelectedRow();
+        
+            
+        if(selRow == -1){
+            JOptionPane.showMessageDialog(rootPane, "Please select a row to delete","Warning",JOptionPane.WARNING_MESSAGE);
+        }else{   
+            Object product_id = productTable.getValueAt(selRow, 0);
+            Object name = productTable.getValueAt(selRow, 1);
+            int a = JOptionPane.showConfirmDialog(rootPane, "This will delete "+name+".\nClick OK to continue","Confirm Delete",JOptionPane.OK_CANCEL_OPTION);
+            
+            if(a==JOptionPane.OK_OPTION){
+                int aa = JOptionPane.showConfirmDialog(rootPane, "Are you sure you want to delete "+name+"?", "Delete", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+                
+                if(aa == JOptionPane.YES_OPTION){
+                    
+                    int rs = ap.DeleteProduct(product_id);
+                    if(rs == 1){
+                        JOptionPane.showMessageDialog(rootPane, "Product "+name+" deleted!","Product Deleted",JOptionPane.WARNING_MESSAGE);
+                        LoadAllProducts();
+                    }
+                }
+            }
+            
+        }
+    
+    }//GEN-LAST:event_btndeleteActionPerformed
 private void product() {
             
             String prname = proName.getText();
@@ -443,6 +486,7 @@ private void product() {
     private javax.swing.JFrame ProductForm;
     private javax.swing.JFrame ProductTableFrame;
     private javax.swing.JButton addproductf;
+    private javax.swing.JButton btndelete;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JEditorPane jEditorPane1;
