@@ -60,13 +60,18 @@ public class AddFrame extends javax.swing.JFrame {
         
         initComponents();
         LoadAllProducts();
+        this.setLocationRelativeTo(null);
     }
     
     public AddFrame(String username) {
         initComponents();
         jLabel5.setText("Welcome  "+username);   
        LoadAllProducts();
+       this.setLocationRelativeTo(null);
     }
+    
+    AddProduct ap = new AddProduct();
+    Object id = null;
 
  public void clearProduct(){
         proName.setText("");
@@ -74,7 +79,7 @@ public class AddFrame extends javax.swing.JFrame {
         proPrice.setText("");
  }
     
-     AddProduct ap = new AddProduct();
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,10 +96,12 @@ public class AddFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         proName = new javax.swing.JTextField();
         proPrice = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
+        addProductbtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         proQuan = new javax.swing.JSpinner();
+        savebtn = new javax.swing.JButton();
+        excQuan = new javax.swing.JLabel();
         ProductTableFrame = new javax.swing.JFrame();
         view1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -104,12 +111,13 @@ public class AddFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         addproductf = new javax.swing.JButton();
         btndelete = new javax.swing.JButton();
+        btnedit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
 
-        ProductForm.setMinimumSize(new java.awt.Dimension(342, 257));
+        ProductForm.setMinimumSize(new java.awt.Dimension(434, 348));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -132,13 +140,13 @@ public class AddFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addProductbtn.setBackground(new java.awt.Color(0, 0, 0));
+        addProductbtn.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        addProductbtn.setForeground(new java.awt.Color(255, 255, 255));
+        addProductbtn.setText("Add Product");
+        addProductbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addProductbtnActionPerformed(evt);
             }
         });
 
@@ -151,6 +159,16 @@ public class AddFrame extends javax.swing.JFrame {
 
         proQuan.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
+        savebtn.setBackground(new java.awt.Color(0, 0, 0));
+        savebtn.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        savebtn.setForeground(new java.awt.Color(255, 255, 255));
+        savebtn.setText("Save");
+        savebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                savebtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -158,29 +176,34 @@ public class AddFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                        .addComponent(jSeparator1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(proName)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel2))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(proName, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(proPrice)
-                                    .addComponent(proQuan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))))
-                        .addGap(10, 10, 10)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(excQuan, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(proQuan))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                            .addComponent(jSeparator1))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(proPrice)))
+                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(194, 194, 194)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(addProductbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(savebtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 103, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,17 +216,24 @@ public class AddFrame extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(proName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(7, 7, 7)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(proQuan, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(proQuan, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(excQuan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(proPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(proPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addComponent(addProductbtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(savebtn)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout ProductFormLayout = new javax.swing.GroupLayout(ProductForm.getContentPane());
@@ -292,6 +322,16 @@ public class AddFrame extends javax.swing.JFrame {
             }
         });
 
+        btnedit.setBackground(new java.awt.Color(0, 0, 0));
+        btnedit.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        btnedit.setForeground(new java.awt.Color(255, 255, 255));
+        btnedit.setText("Edit");
+        btnedit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneditActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout view1Layout = new javax.swing.GroupLayout(view1);
         view1.setLayout(view1Layout);
         view1Layout.setHorizontalGroup(
@@ -307,6 +347,9 @@ public class AddFrame extends javax.swing.JFrame {
                         .addGap(8, 8, 8))
                     .addGroup(view1Layout.createSequentialGroup()
                         .addComponent(btndelete, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                        .addGap(349, 349, 349))
+                    .addGroup(view1Layout.createSequentialGroup()
+                        .addComponent(btnedit, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
                         .addGap(349, 349, 349))))
         );
         view1Layout.setVerticalGroup(
@@ -319,7 +362,9 @@ public class AddFrame extends javax.swing.JFrame {
                         .addComponent(addproductf, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 338, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 297, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, view1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())))
@@ -383,12 +428,12 @@ public class AddFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addProductbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductbtnActionPerformed
 product();
 ProductForm.setVisible(false);
 ProductTableFrame.setVisible(true);
 LoadAllProducts();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_addProductbtnActionPerformed
 
     private void proPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proPriceActionPerformed
         // TODO add your handling code here:
@@ -431,6 +476,40 @@ LoadAllProducts();
         }
     
     }//GEN-LAST:event_btndeleteActionPerformed
+
+    private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
+        
+         this.clearProduct();
+        int row = productTable.getSelectedRow();
+
+        if (row != -1) {
+            ProductForm.setVisible(true);
+            ProductForm.setAlwaysOnTop(true);
+            ProductForm.setLocationRelativeTo(null);
+            addProductbtn.setVisible(false);
+            addProductbtn.setVisible(true);
+//            addQuantitybtn.setVisible(false);
+            proQuan.setEnabled(false);
+
+            id = productTable.getValueAt(row, 0);
+            Object pname = productTable.getValueAt(row, 1);
+            Object pqty = productTable.getValueAt(row, 2);
+            Object pprice = productTable.getValueAt(row, 3);
+
+            proName.setText((String) pname);
+            proQuan.setValue(Integer.valueOf(pqty.toString()));
+            proPrice.setValue(Double.valueOf(pprice.toString()));
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Please select a row", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_btneditActionPerformed
+
+    private void savebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savebtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_savebtnActionPerformed
 private void product() {
             
             String prname = proName.getText();
@@ -485,9 +564,11 @@ private void product() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFrame ProductForm;
     private javax.swing.JFrame ProductTableFrame;
+    private javax.swing.JButton addProductbtn;
     private javax.swing.JButton addproductf;
     private javax.swing.JButton btndelete;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnedit;
+    private javax.swing.JLabel excQuan;
     private javax.swing.JButton jButton2;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
@@ -506,6 +587,7 @@ private void product() {
     private javax.swing.JFormattedTextField proPrice;
     private javax.swing.JSpinner proQuan;
     private javax.swing.JTable productTable;
+    private javax.swing.JButton savebtn;
     private javax.swing.JPanel view1;
     // End of variables declaration//GEN-END:variables
 
