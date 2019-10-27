@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 
 public class AddProduct {
     
-    public void addProduct(String product, int quantity, Object price){ 
+public void addProduct(String product, int quantity, Object price){ 
         
 
 try {
@@ -72,9 +72,56 @@ Logger.getLogger(AddFrame.class.getName()).log(Level.SEVERE, null, ex);
         return selRow;
     }
      
-     
-     
-    
+     public int editProduct(Object product_id, String name, Object price){
+        int r = 0;
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver"); 
+            Connection con = DriverManager.getConnection(conUrl);
+
+            PreparedStatement pstmt = con.prepareStatement ("UPDATE product SET name = ?, price = ? WHERE id = ?;");
+            
+            pstmt.setString(1, name);
+            float newprice = Float.parseFloat(price.toString());
+            pstmt.setFloat(2, newprice);
+            String newid = product_id.toString();
+            pstmt.setString(3, newid);
+            
+            r = pstmt.executeUpdate();
+            //System.out.println(pstmt);
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return r;
+     }  
+
+    int addQuantity(Object id, Object qty) {
+   
+        
+        int r = 0;
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver"); 
+            Connection con = DriverManager.getConnection(conUrl);
+
+            PreparedStatement pstmt = con.prepareStatement ();
+            
+            pstmt.setString(1, name);
+            float newprice = Float.parseFloat(price.toString());
+            pstmt.setFloat(2, newprice);
+            String newid = product_id.toString();
+            pstmt.setString(3, newid);
+            
+            r = pstmt.executeUpdate();
+            //System.out.println(pstmt);
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return r;
+     }  
+    }
 }
 
 
